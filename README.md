@@ -16,17 +16,17 @@ Sigue estos pasos exactos en tu terminal para poner en marcha el servidor:
 Descarga el código en tu máquina local:
 git clone [https://github.com/DylanRoman37/Sistema-de-Chat.git](https://github.com/DylanRoman37/Sistema-de-Chat.git)
 cd Sistema-de-Chat
-2. Entrar a la carpeta del servidor (MUY IMPORTANTE)
+###2. Entrar a la carpeta del servidor (MUY IMPORTANTE)
 El archivo package.json y la lógica del backend se encuentran en esta subcarpeta.
 
 Bash
 cd Backend
-3. Instalar las librerías
+###3. Instalar las librerías
 Este comando descargará automáticamente las dependencias necesarias (ws y sqlite3).
 Bash
 npm install
 
-4. Iniciar el servidor
+###4. Iniciar el servidor
 Enciende el chat y activa la base de datos:
 Bash
 node server.js
