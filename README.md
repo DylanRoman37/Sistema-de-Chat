@@ -23,12 +23,11 @@ Bash
 cd Backend
 3. Instalar las librerías
 Este comando descargará automáticamente las dependencias necesarias (ws y sqlite3).
-
 Bash
 npm install
+
 4. Iniciar el servidor
 Enciende el chat y activa la base de datos:
-
 Bash
 node server.js
 
