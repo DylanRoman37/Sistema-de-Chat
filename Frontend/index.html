@@ -589,7 +589,14 @@
 
 <div id="toast" role="status" aria-live="polite"></div>
 
-<script>
+
+<script type="module">
+
+import {
+  auth,
+  provider,
+  signInWithPopup
+} from "./firebase.js";
 // ── State ──────────────────────────────────────────────────────────────────
 let ws = null;
 let currentUser = '';
@@ -775,8 +782,38 @@ document.getElementById('join-btn').addEventListener('click', () => {
 });
 
 // Google placeholder
-document.getElementById('google-btn').addEventListener('click', () => {
-  showToast('Autenticación con Google: integrar Firebase/OAuth en Task 3');
+document.getElementById('google-btn').addEventListener('click', async () => {
+
+  try {
+
+    const result = await signInWithPopup(auth, provider);
+
+    const user = result.user;
+
+    currentUser = user.displayName || randomAlias();
+
+    document.getElementById('user-tag').textContent = currentUser;
+
+    document.getElementById('login-overlay').style.display = 'none';
+
+    onlineUsers = [currentUser];
+
+    renderUsers();
+
+    connectWS();
+
+    showToast(`Bienvenido ${currentUser}`);
+
+    console.log(user);
+
+  } catch (error) {
+
+    console.error(error);
+
+    showToast('Error al iniciar sesión con Google');
+
+  }
+
 });
 
 // ── Room switching ─────────────────────────────────────────────────────────
