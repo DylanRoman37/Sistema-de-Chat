@@ -1,32 +1,188 @@
+# 💬 SiscoLab — Sistema de Chat Colaborativo
 
-
-
-
-## 🛠️ Requisitos Previos
-Antes de empezar, asegúrate de tener instalado:
-* **Node.js** (Versión 16 o superior)
+SiscoLab es una plataforma de chat en tiempo real diseñada para la colaboración técnica. Utiliza **WebSockets** para una comunicación instantánea y **SQLite** para mantener un historial persistente de los mensajes.
 
 ---
 
-## 🔧 Guía de Instalación y Ejecución
+# 🚀 Características
 
-Sigue estos pasos exactos en tu terminal para poner en marcha el servidor:
+✅ Chat en tiempo real  
+✅ Comunicación mediante WebSockets  
+✅ Historial persistente con SQLite  
+✅ Frontend y Backend integrados  
+✅ Inicio automático con un solo comando  
+✅ Arquitectura simple y escalable  
 
-### 1. Clonar el repositorio
-Descarga el código en tu máquina local:
-git clone [https://github.com/DylanRoman37/Sistema-de-Chat.git](https://github.com/DylanRoman37/Sistema-de-Chat.git)
+---
+
+# 🛠️ Tecnologías Utilizadas
+
+- Node.js
+- Express.js
+- WebSocket (ws)
+- SQLite
+- HTML5
+- CSS3
+- JavaScript
+
+---
+
+# 📋 Requisitos Previos
+
+Antes de empezar, asegúrate de tener instalado:
+
+- **Node.js** (Versión 16 o superior)
+- **npm** (Incluido con Node.js)
+
+Verifica las versiones con:
+
+```bash
+node -v
+npm -v
+```
+
+---
+
+# 🔧 Instalación y Ejecución
+
+Sigue estos pasos para ejecutar el sistema completo.
+
+---
+
+## 1️⃣ Clonar el Repositorio
+
+```bash
+git clone https://github.com/DylanRoman37/Sistema-de-Chat.git
 cd Sistema-de-Chat
-### 2. Entrar a la carpeta del servidor 
-El archivo package.json y la lógica del backend se encuentran en esta subcarpeta.
+```
 
-Bash
-cd Backend
-### 3. Instalar las librerías
-Este comando descargará automáticamente las dependencias necesarias (ws y sqlite3).
+---
+
+# 🔧 Instalación y Ejecución
+
+Sigue estos pasos para ejecutar el sistema completo.
+
+---
+
+## 1️⃣ Clonar el Repositorio
+
+```bash
+git clone https://github.com/DylanRoman37/Sistema-de-Chat.git
+cd Sistema-de-Chat
+```
+
+---
+
+## 2️⃣ Instalar Dependencias del Proyecto
+
+Instala todas las dependencias desde la carpeta raíz:
+
+```bash
 npm install
+```
 
-### 4. Iniciar el servidor
-Enciende el chat y activa la base de datos:
-node server.js
+---
 
-Nota: El servidor estará escuchando en el puerto 3000 (ws://localhost:3000).
+## 3️⃣ Iniciar la Aplicación
+
+Ejecuta el siguiente comando desde la carpeta raíz:
+
+```bash
+npm start
+```
+
+Esto iniciará automáticamente:
+
+- El servidor Backend
+- El Frontend
+- La conexión WebSocket
+
+---
+
+# 🌐 Información del Sistema
+
+Una vez iniciado el proyecto:
+
+| Servicio | Dirección |
+|---|---|
+| Frontend | http://localhost:4000 |
+| Backend WebSocket | ws://localhost:3000 |
+
+---
+
+# 💾 Persistencia de Datos
+
+Todos los mensajes enviados en el chat se almacenan automáticamente en:
+
+```bash
+Backend/chat.db
+```
+
+La base de datos SQLite permite mantener el historial incluso después de cerrar el sistema.
+
+---
+
+# 📁 Estructura del Proyecto
+
+```bash
+Sistema-de-Chat/
+│
+├── Backend/
+│   ├── server.js
+│   ├── database.js
+│   ├── chat.db
+│   └── package.json
+│
+├── Frontend/
+│   ├── index.html
+│   ├── style.css
+│   ├── script.js
+│   └── assets/
+│
+├── package.json
+└── README.md
+```
+
+---
+
+# ⚙️ Scripts Disponibles
+
+## Ejecutar el proyecto completo
+
+```bash
+npm start
+```
+
+## Ejecutar solo el Backend
+
+```bash
+cd Backend
+npm start
+```
+
+---
+
+# 📡 Funcionamiento General
+
+1. El usuario abre el Frontend en el navegador.
+2. El Frontend se conecta al servidor WebSocket.
+3. Los mensajes enviados se transmiten en tiempo real.
+4. El Backend almacena los mensajes en SQLite.
+5. Los usuarios conectados reciben los mensajes instantáneamente.
+
+---
+
+# 🔐 Futuras Mejoras
+
+- Sistema de autenticación
+- Salas privadas
+- Envío de archivos
+- Emojis y reacciones
+- Notificaciones en tiempo real
+- Dockerización del proyecto
+- Deploy en la nube
+
+
+# 📄 Licencia
+
+Este proyecto es de uso académico y educativo.

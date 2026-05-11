@@ -4,7 +4,9 @@ const http = require('http');
 const sqlite3 = require('sqlite3').verbose();
 
 // Conectamos/Creamos la base de datos 
-const db = new sqlite3.Database('./chat.db');
+const path = require('path');
+const dbPath = path.join(__dirname, 'chat.db');
+const db = new sqlite3.Database(dbPath);
 
 db.serialize(() => {
     db.run("CREATE TABLE IF NOT EXISTS mensajes (id INTEGER PRIMARY KEY AUTOINCREMENT, texto TEXT)");
@@ -21,7 +23,7 @@ wss.on('connection', (ws) => {
     db.all("SELECT texto FROM mensajes", [], (err, rows) => {
         if (!err) {
             rows.forEach((row) => {
-                ws.send(row.texto); 
+                ws.send(row.texto);
             });
         }
     });
