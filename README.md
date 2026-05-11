@@ -58,9 +58,24 @@ cd Sistema-de-Chat
 
 ---
 
-## 2️⃣ Instalar Dependencias del Proyecto Principal
+# 🔧 Instalación y Ejecución
 
-Desde la carpeta raíz:
+Sigue estos pasos para ejecutar el sistema completo.
+
+---
+
+## 1️⃣ Clonar el Repositorio
+
+```bash
+git clone https://github.com/DylanRoman37/Sistema-de-Chat.git
+cd Sistema-de-Chat
+```
+
+---
+
+## 2️⃣ Instalar Dependencias del Proyecto
+
+Instala todas las dependencias desde la carpeta raíz:
 
 ```bash
 npm install
@@ -68,19 +83,7 @@ npm install
 
 ---
 
-## 3️⃣ Instalar Dependencias del Backend
-
-Ingresa a la carpeta Backend e instala las librerías necesarias:
-
-```bash
-cd Backend
-npm install
-cd ..
-```
-
----
-
-## 4️⃣ Iniciar el Sistema Completo
+## 3️⃣ Iniciar la Aplicación
 
 Ejecuta el siguiente comando desde la carpeta raíz:
 
