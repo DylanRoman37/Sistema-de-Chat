@@ -1,0 +1,14 @@
+{
+  "name": "sistema-de-chat-root",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "Backend"
+  ],
+  "scripts": {
+    "start": "concurrently \"node Backend/server.js\" \"npx serve -s Frontend -l 4000\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
