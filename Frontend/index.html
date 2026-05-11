@@ -1,38 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SiscoLab — Chat Colaborativo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700&display=swap"
+    rel="stylesheet" />
   <style>
     /* ── Variables ── */
     :root {
-      --bg:          #0d0f12;
-      --bg-panel:    #13161b;
-      --bg-card:     #1a1e25;
-      --bg-input:    #1f242d;
-      --border:      #2a303c;
-      --border-hi:   #3d4758;
-      --accent:      #4f9cf9;
-      --accent-dim:  #1e3a5f;
-      --accent-glow: rgba(79,156,249,0.15);
-      --green:       #3dd68c;
-      --green-dim:   #0f3a25;
-      --amber:       #f0a732;
-      --red:         #f06060;
-      --text-1:      #e8ecf0;
-      --text-2:      #8a96a6;
-      --text-3:      #56616e;
-      --radius:      10px;
-      --font-ui:     'Syne', sans-serif;
-      --font-mono:   'DM Mono', monospace;
+      --bg: #0d0f12;
+      --bg-panel: #13161b;
+      --bg-card: #1a1e25;
+      --bg-input: #1f242d;
+      --border: #2a303c;
+      --border-hi: #3d4758;
+      --accent: #4f9cf9;
+      --accent-dim: #1e3a5f;
+      --accent-glow: rgba(79, 156, 249, 0.15);
+      --green: #3dd68c;
+      --green-dim: #0f3a25;
+      --amber: #f0a732;
+      --red: #f06060;
+      --text-1: #e8ecf0;
+      --text-2: #8a96a6;
+      --text-3: #56616e;
+      --radius: 10px;
+      --font-ui: 'Syne', sans-serif;
+      --font-mono: 'DM Mono', monospace;
     }
 
     /* ── Reset ── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; overflow: hidden; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+      overflow: hidden;
+    }
+
     body {
       font-family: var(--font-ui);
       background: var(--bg);
@@ -52,15 +66,18 @@
       background: var(--bg-panel);
       flex-shrink: 0;
     }
+
     #topbar .logo {
       font-size: 17px;
       font-weight: 700;
       letter-spacing: -0.3px;
       color: var(--text-1);
     }
+
     #topbar .logo span {
       color: var(--accent);
     }
+
     #topbar .status-pill {
       display: flex;
       align-items: center;
@@ -73,6 +90,7 @@
       border-radius: 99px;
       padding: 5px 12px;
     }
+
     #topbar .status-pill .dot {
       width: 7px;
       height: 7px;
@@ -80,8 +98,16 @@
       background: var(--text-3);
       transition: background .3s;
     }
-    #topbar .status-pill .dot.online { background: var(--green); box-shadow: 0 0 8px var(--green); }
-    #topbar .status-pill .dot.error  { background: var(--red); }
+
+    #topbar .status-pill .dot.online {
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+    }
+
+    #topbar .status-pill .dot.error {
+      background: var(--red);
+    }
+
     #user-tag {
       font-family: var(--font-mono);
       font-size: 12px;
@@ -109,6 +135,7 @@
       flex-shrink: 0;
       overflow: hidden;
     }
+
     .sidebar-section {
       padding: 16px 16px 8px;
       font-size: 10px;
@@ -117,10 +144,12 @@
       text-transform: uppercase;
       color: var(--text-3);
     }
+
     #room-list {
       padding: 0 8px 16px;
       flex-shrink: 0;
     }
+
     .room-item {
       display: flex;
       align-items: center;
@@ -132,22 +161,41 @@
       cursor: pointer;
       transition: background .15s, color .15s;
     }
-    .room-item:hover { background: var(--bg-card); color: var(--text-1); }
+
+    .room-item:hover {
+      background: var(--bg-card);
+      color: var(--text-1);
+    }
+
     .room-item.active {
       background: var(--accent-dim);
       color: var(--accent);
       font-weight: 600;
     }
-    .room-item .hash { opacity: .5; font-size: 15px; }
+
+    .room-item .hash {
+      opacity: .5;
+      font-size: 15px;
+    }
 
     #users-section {
       flex: 1;
       overflow-y: auto;
       padding: 0 8px 16px;
     }
-    #users-section::-webkit-scrollbar { width: 4px; }
-    #users-section::-webkit-scrollbar-track { background: transparent; }
-    #users-section::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    #users-section::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    #users-section::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    #users-section::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
 
     .user-item {
       display: flex;
@@ -158,6 +206,7 @@
       font-size: 13px;
       color: var(--text-2);
     }
+
     .user-avatar {
       width: 28px;
       height: 28px;
@@ -169,6 +218,7 @@
       font-weight: 600;
       flex-shrink: 0;
     }
+
     .user-item .udot {
       width: 6px;
       height: 6px;
@@ -198,12 +248,16 @@
       color: var(--text-2);
       flex-shrink: 0;
     }
+
     #channel-header .channel-name {
       font-weight: 600;
       color: var(--text-1);
       font-size: 15px;
     }
-    #channel-header .sep { opacity: .3; }
+
+    #channel-header .sep {
+      opacity: .3;
+    }
 
     /* Messages */
     #messages {
@@ -214,9 +268,19 @@
       flex-direction: column;
       gap: 2px;
     }
-    #messages::-webkit-scrollbar { width: 5px; }
-    #messages::-webkit-scrollbar-track { background: transparent; }
-    #messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    #messages::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    #messages::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    #messages::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
 
     .msg {
       display: flex;
@@ -225,7 +289,11 @@
       border-radius: var(--radius);
       transition: background .1s;
     }
-    .msg:hover { background: var(--bg-card); }
+
+    .msg:hover {
+      background: var(--bg-card);
+    }
+
     .msg .avatar {
       width: 34px;
       height: 34px;
@@ -238,30 +306,41 @@
       flex-shrink: 0;
       margin-top: 2px;
     }
-    .msg-body { flex: 1; min-width: 0; }
+
+    .msg-body {
+      flex: 1;
+      min-width: 0;
+    }
+
     .msg-meta {
       display: flex;
       align-items: baseline;
       gap: 8px;
       margin-bottom: 3px;
     }
+
     .msg-author {
       font-size: 14px;
       font-weight: 600;
       color: var(--text-1);
     }
+
     .msg-time {
       font-family: var(--font-mono);
       font-size: 11px;
       color: var(--text-3);
     }
+
     .msg-text {
       font-size: 14px;
       color: var(--text-2);
       line-height: 1.6;
       word-break: break-word;
     }
-    .msg.own .msg-author { color: var(--accent); }
+
+    .msg.own .msg-author {
+      color: var(--accent);
+    }
 
     /* System messages */
     .msg-system {
@@ -273,6 +352,7 @@
       font-size: 12px;
       color: var(--text-3);
     }
+
     .msg-system::before,
     .msg-system::after {
       content: '';
@@ -292,7 +372,9 @@
       color: var(--text-3);
       letter-spacing: .5px;
     }
-    .date-divider::before, .date-divider::after {
+
+    .date-divider::before,
+    .date-divider::after {
       content: '';
       flex: 1;
       height: 1px;
@@ -304,6 +386,7 @@
       padding: 12px 20px 16px;
       flex-shrink: 0;
     }
+
     #input-wrap {
       display: flex;
       align-items: center;
@@ -314,10 +397,12 @@
       padding: 0 12px;
       transition: border-color .2s;
     }
+
     #input-wrap:focus-within {
       border-color: var(--accent);
       box-shadow: 0 0 0 3px var(--accent-glow);
     }
+
     #msg-input {
       flex: 1;
       background: none;
@@ -329,7 +414,11 @@
       padding: 13px 0;
       caret-color: var(--accent);
     }
-    #msg-input::placeholder { color: var(--text-3); }
+
+    #msg-input::placeholder {
+      color: var(--text-3);
+    }
+
     #send-btn {
       background: var(--accent);
       border: none;
@@ -343,10 +432,25 @@
       flex-shrink: 0;
       transition: opacity .15s, transform .1s;
     }
-    #send-btn:hover { opacity: .85; }
-    #send-btn:active { transform: scale(.94); }
-    #send-btn svg { width: 16px; height: 16px; fill: #fff; }
-    #send-btn:disabled { opacity: .3; cursor: default; }
+
+    #send-btn:hover {
+      opacity: .85;
+    }
+
+    #send-btn:active {
+      transform: scale(.94);
+    }
+
+    #send-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: #fff;
+    }
+
+    #send-btn:disabled {
+      opacity: .3;
+      cursor: default;
+    }
 
     #typing-hint {
       height: 16px;
@@ -360,13 +464,14 @@
     #login-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(13,15,18,.92);
+      background: rgba(13, 15, 18, .92);
       backdrop-filter: blur(8px);
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 100;
     }
+
     #login-box {
       background: var(--bg-panel);
       border: 1px solid var(--border-hi);
@@ -377,13 +482,18 @@
       flex-direction: column;
       gap: 24px;
     }
+
     #login-box .logo-big {
       font-size: 22px;
       font-weight: 700;
       text-align: center;
       letter-spacing: -0.5px;
     }
-    #login-box .logo-big span { color: var(--accent); }
+
+    #login-box .logo-big span {
+      color: var(--accent);
+    }
+
     #login-box .subtitle {
       text-align: center;
       font-size: 13px;
@@ -391,7 +501,13 @@
       margin-top: -16px;
       font-family: var(--font-mono);
     }
-    .field-group { display: flex; flex-direction: column; gap: 8px; }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
     .field-label {
       font-size: 12px;
       font-weight: 600;
@@ -399,6 +515,7 @@
       text-transform: uppercase;
       color: var(--text-3);
     }
+
     .field-input {
       background: var(--bg-input);
       border: 1px solid var(--border);
@@ -410,17 +527,23 @@
       outline: none;
       transition: border-color .2s;
     }
-    .field-input::placeholder { color: var(--text-3); }
+
+    .field-input::placeholder {
+      color: var(--text-3);
+    }
+
     .field-input:focus {
       border-color: var(--accent);
       box-shadow: 0 0 0 3px var(--accent-glow);
     }
+
     .hint {
       font-size: 11px;
       font-family: var(--font-mono);
       color: var(--text-3);
       margin-top: -4px;
     }
+
     #join-btn {
       background: var(--accent);
       border: none;
@@ -433,8 +556,15 @@
       cursor: pointer;
       transition: opacity .15s, transform .1s;
     }
-    #join-btn:hover { opacity: .85; }
-    #join-btn:active { transform: scale(.98); }
+
+    #join-btn:hover {
+      opacity: .85;
+    }
+
+    #join-btn:active {
+      transform: scale(.98);
+    }
+
     .divider-or {
       display: flex;
       align-items: center;
@@ -442,12 +572,15 @@
       font-size: 12px;
       color: var(--text-3);
     }
-    .divider-or::before, .divider-or::after {
+
+    .divider-or::before,
+    .divider-or::after {
       content: '';
       flex: 1;
       height: 1px;
       background: var(--border);
     }
+
     #google-btn {
       display: flex;
       align-items: center;
@@ -463,7 +596,11 @@
       color: var(--text-2);
       transition: border-color .2s, color .2s;
     }
-    #google-btn:hover { border-color: var(--accent); color: var(--text-1); }
+
+    #google-btn:hover {
+      border-color: var(--accent);
+      color: var(--text-1);
+    }
 
     /* Toast */
     #toast {
@@ -483,170 +620,223 @@
       pointer-events: none;
       z-index: 200;
     }
-    #toast.show { opacity: 1; transform: translateY(0); }
+
+    #toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     /* Scrollbar global */
-    * { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
   </style>
 </head>
+
 <body>
 
-<!-- ── Login Overlay ── -->
-<div id="login-overlay">
-  <div id="login-box">
-    <div class="logo-big">Sisco<span>Lab</span></div>
-    <p class="subtitle">// sistema de chat colaborativo</p>
+  <!-- ── Login Overlay ── -->
+  <div id="login-overlay">
+    <div id="login-box">
+      <div class="logo-big">Sisco<span>Lab</span></div>
+      <p class="subtitle">// sistema de chat colaborativo</p>
 
-    <div class="field-group">
-      <label class="field-label" for="username-input">Nombre de usuario</label>
-      <input class="field-input" id="username-input" type="text"
-             placeholder="ej. maria.garcia" maxlength="24" autocomplete="off" />
-      <p class="hint">Dejar vacío para generar un alias temporal (Usuario_XXX)</p>
-    </div>
-
-    <div class="field-group">
-      <label class="field-label" for="room-input">Sala</label>
-      <input class="field-input" id="room-input" type="text"
-             value="general" maxlength="20" autocomplete="off" />
-    </div>
-
-    <button id="join-btn">Entrar al chat →</button>
-
-    <div class="divider-or">o continúa con</div>
-
-    <button id="google-btn">
-      <!-- Google icon inline SVG -->
-      <svg width="18" height="18" viewBox="0 0 48 48" fill="none">
-        <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-        <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-        <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-        <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-      </svg>
-      Continuar con Google
-    </button>
-  </div>
-</div>
-
-<!-- ── App Shell ── -->
-<div id="topbar">
-  <div class="logo">Sisco<span>Lab</span></div>
-  <div style="display:flex; align-items:center; gap:12px">
-    <div id="user-tag">—</div>
-    <div class="status-pill">
-      <div class="dot" id="conn-dot"></div>
-      <span id="conn-label">Desconectado</span>
-    </div>
-  </div>
-</div>
-
-<div id="layout">
-  <!-- Sidebar -->
-  <div id="sidebar">
-    <div class="sidebar-section">Salas</div>
-    <div id="room-list">
-      <div class="room-item active" data-room="general">
-        <span class="hash">#</span> general
+      <div class="field-group">
+        <label class="field-label" for="username-input">Nombre de usuario</label>
+        <input class="field-input" id="username-input" type="text" placeholder="ej. maria.garcia" maxlength="24"
+          autocomplete="off" />
+        <p class="hint">Dejar vacío para generar un alias temporal (Usuario_XXX)</p>
       </div>
-      <div class="room-item" data-room="dev">
-        <span class="hash">#</span> dev
-      </div>
-      <div class="room-item" data-room="random">
-        <span class="hash">#</span> random
-      </div>
-    </div>
 
-    <div class="sidebar-section">En línea</div>
-    <div id="users-section" role="list" aria-label="Usuarios conectados">
-      <!-- populated by JS -->
+      <div class="field-group">
+        <label class="field-label" for="room-input">Sala</label>
+        <input class="field-input" id="room-input" type="text" value="general" maxlength="20" autocomplete="off" />
+      </div>
+
+      <button id="join-btn">Entrar al chat →</button>
+
+      <div class="divider-or">o continúa con</div>
+
+      <button id="google-btn">
+        <!-- Google icon inline SVG -->
+        <svg width="18" height="18" viewBox="0 0 48 48" fill="none">
+          <path fill="#EA4335"
+            d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+          <path fill="#4285F4"
+            d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+          <path fill="#FBBC05"
+            d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+          <path fill="#34A853"
+            d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+        </svg>
+        Continuar con Google
+      </button>
     </div>
   </div>
 
-  <!-- Main chat -->
-  <div id="main">
-    <div id="channel-header">
-      <span class="channel-name" id="ch-name"># general</span>
-      <span class="sep">|</span>
-      <span id="ch-desc" style="font-size:13px">Canal principal del equipo</span>
-    </div>
-
-    <div id="messages" role="log" aria-live="polite" aria-label="Historial de mensajes">
-      <div class="date-divider" id="today-divider">hoy</div>
-    </div>
-
-    <div id="input-bar">
-      <div id="input-wrap">
-        <input id="msg-input" type="text"
-               placeholder="Escribe un mensaje… (Enter para enviar)"
-               maxlength="500" autocomplete="off" disabled />
-        <button id="send-btn" disabled title="Enviar mensaje" aria-label="Enviar mensaje">
-          <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
-        </button>
+  <!-- ── App Shell ── -->
+  <div id="topbar">
+    <div class="logo">Sisco<span>Lab</span></div>
+    <div style="display:flex; align-items:center; gap:12px">
+      <div id="user-tag">—</div>
+      <div class="status-pill">
+        <div class="dot" id="conn-dot"></div>
+        <span id="conn-label">Desconectado</span>
       </div>
-      <div id="typing-hint"></div>
     </div>
   </div>
-</div>
 
-<div id="toast" role="status" aria-live="polite"></div>
+  <div id="layout">
+    <!-- Sidebar -->
+    <div id="sidebar">
+      <div class="sidebar-section">Salas</div>
+      <div id="room-list">
+        <div class="room-item active" data-room="general">
+          <span class="hash">#</span> general
+        </div>
+        <div class="room-item" data-room="dev">
+          <span class="hash">#</span> dev
+        </div>
+        <div class="room-item" data-room="random">
+          <span class="hash">#</span> random
+        </div>
+      </div>
 
+      <div class="sidebar-section">En línea</div>
+      <div id="users-section" role="list" aria-label="Usuarios conectados">
+        <!-- populated by JS -->
+      </div>
+    </div>
 
-<script type="module">
+    <!-- Main chat -->
+    <div id="main">
+      <div id="channel-header">
+        <span class="channel-name" id="ch-name"># general</span>
+        <span class="sep">|</span>
+        <span id="ch-desc" style="font-size:13px">Canal principal del equipo</span>
+      </div>
 
-import {
-  auth,
-  provider,
-  signInWithPopup
-} from "./firebase.js";
-// ── State ──────────────────────────────────────────────────────────────────
-let ws = null;
-let currentUser = '';
-let currentRoom = 'general';
-let onlineUsers  = [];
-const AVATAR_COLORS = [
-  ['#1e3a5f','#4f9cf9'],['#0f3a25','#3dd68c'],['#3a1e1e','#f06060'],
-  ['#3a2e0f','#f0a732'],['#2a1e3a','#b06af5'],['#1e3038','#38c9d8'],
-];
+      <div id="messages" role="log" aria-live="polite" aria-label="Historial de mensajes">
+        <div class="date-divider" id="today-divider">hoy</div>
+      </div>
 
-// ── Utils ──────────────────────────────────────────────────────────────────
-function randomAlias() {
-  return 'Usuario_' + Math.floor(100 + Math.random() * 900);
-}
-function avatarColor(name) {
-  let h = 0;
-  for (const c of name) h = (h * 31 + c.charCodeAt(0)) & 0xffff;
-  return AVATAR_COLORS[h % AVATAR_COLORS.length];
-}
-function initials(name) {
-  return name.slice(0, 2).toUpperCase();
-}
-function timestamp() {
-  return new Date().toLocaleTimeString('es-BO', { hour: '2-digit', minute: '2-digit' });
-}
-function showToast(msg, duration = 3000) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), duration);
-}
-function scrollToBottom() {
-  const el = document.getElementById('messages');
-  el.scrollTop = el.scrollHeight;
-}
+      <div id="input-bar">
+        <div id="input-wrap">
+          <input id="msg-input" type="text" placeholder="Escribe un mensaje… (Enter para enviar)" maxlength="500"
+            autocomplete="off" disabled />
+          <button id="send-btn" disabled title="Enviar mensaje" aria-label="Enviar mensaje">
+            <svg viewBox="0 0 24 24">
+              <path d="M2 21l21-9L2 3v7l15 2-15 2v7z" />
+            </svg>
+          </button>
+        </div>
+        <div id="typing-hint"></div>
+      </div>
+    </div>
+  </div>
 
-// ── Render helpers ─────────────────────────────────────────────────────────
-function appendSystemMsg(text) {
-  const div = document.createElement('div');
-  div.className = 'msg-system';
-  div.textContent = text;
-  document.getElementById('messages').appendChild(div);
-  scrollToBottom();
-}
+  <div id="toast" role="status" aria-live="polite"></div>
 
-function appendMessage(author, text, isOwn, time) {
-  const [bg, fg] = avatarColor(author);
-  const msgEl = document.createElement('div');
-  msgEl.className = 'msg' + (isOwn ? ' own' : '');
-  msgEl.innerHTML = `
+  <script type="module">
+    // 1. SOLO importamos la función desde nuestro módulo. No importamos nada de Firebase aquí.
+    import { iniciarSesionGoogle } from './auth/auth.js';
+
+    // 2. Evento del botón
+    document.getElementById('google-btn').addEventListener('click', async () => {
+      // Llamamos a la función modularizada que creamos antes
+      const nombre = await iniciarSesionGoogle();
+
+      // Si la autenticación fue exitosa y tenemos un nombre
+      if (nombre) {
+        // Llamamos a la función para entrar al chat (tu lógica actual)
+        window.startChatWithUser(nombre);
+
+        /* Nota: Si quieres seguir la estructura de "todo al backend", 
+           aquí podrías llamar a una función fetch para avisar a tu servidor 
+           antes de entrar al chat.
+        */
+      }
+    });
+  </script>
+
+  <script>
+    // ── State ──────────────────────────────────────────────────────────────────
+    let ws = null;
+    let currentUser = '';
+    let currentRoom = 'general';
+    let onlineUsers = [];
+    const AVATAR_COLORS = [
+      ['#1e3a5f', '#4f9cf9'], ['#0f3a25', '#3dd68c'], ['#3a1e1e', '#f06060'],
+      ['#3a2e0f', '#f0a732'], ['#2a1e3a', '#b06af5'], ['#1e3038', '#38c9d8'],
+    ];
+
+    window.startChatWithUser = async function (nombre) {
+      const rawRoom = document.getElementById('room-input').value.trim() || 'general';
+      try {
+        const response = await fetch('http://localhost:3000/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: nombre, room: rawRoom })
+        });
+        const result = await response.json();
+        if (result.success) {
+          currentUser = result.user.username;
+          currentRoom = result.user.room;
+          document.getElementById('user-tag').textContent = currentUser;
+          document.getElementById('ch-name').textContent = '# ' + currentRoom;
+          document.getElementById('login-overlay').style.display = 'none';
+          onlineUsers = [currentUser];
+          renderUsers();
+          connectWS();
+        } else {
+          alert("Acceso denegado: " + result.message);
+        }
+      } catch (error) {
+        console.error("Error conectando con el servidor:", error);
+      }
+    };
+
+    // ── Utils ──────────────────────────────────────────────────────────────────
+    function randomAlias() {
+      return 'Usuario_' + Math.floor(100 + Math.random() * 900);
+    }
+    function avatarColor(name) {
+      let h = 0;
+      for (const c of name) h = (h * 31 + c.charCodeAt(0)) & 0xffff;
+      return AVATAR_COLORS[h % AVATAR_COLORS.length];
+    }
+    function initials(name) {
+      return name.slice(0, 2).toUpperCase();
+    }
+    function timestamp() {
+      return new Date().toLocaleTimeString('es-BO', { hour: '2-digit', minute: '2-digit' });
+    }
+    function showToast(msg, duration = 3000) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), duration);
+    }
+    function scrollToBottom() {
+      const el = document.getElementById('messages');
+      el.scrollTop = el.scrollHeight;
+    }
+
+    // ── Render helpers ─────────────────────────────────────────────────────────
+    function appendSystemMsg(text) {
+      const div = document.createElement('div');
+      div.className = 'msg-system';
+      div.textContent = text;
+      document.getElementById('messages').appendChild(div);
+      scrollToBottom();
+    }
+
+    function appendMessage(author, text, isOwn, time) {
+      const [bg, fg] = avatarColor(author);
+      const msgEl = document.createElement('div');
+      msgEl.className = 'msg' + (isOwn ? ' own' : '');
+      msgEl.innerHTML = `
     <div class="avatar" style="background:${bg}; color:${fg}">${initials(author)}</div>
     <div class="msg-body">
       <div class="msg-meta">
@@ -655,188 +845,142 @@ function appendMessage(author, text, isOwn, time) {
       </div>
       <div class="msg-text">${escHtml(text)}</div>
     </div>`;
-  document.getElementById('messages').appendChild(msgEl);
-  scrollToBottom();
-}
+      document.getElementById('messages').appendChild(msgEl);
+      scrollToBottom();
+    }
 
-function escHtml(s) {
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
+    function escHtml(s) {
+      return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
 
-function renderUsers() {
-  const el = document.getElementById('users-section');
-  el.innerHTML = '';
-  const list = onlineUsers.length ? onlineUsers : [currentUser];
-  list.forEach(u => {
-    const [bg, fg] = avatarColor(u);
-    const div = document.createElement('div');
-    div.className = 'user-item';
-    div.setAttribute('role', 'listitem');
-    div.innerHTML = `
+    function renderUsers() {
+      const el = document.getElementById('users-section');
+      el.innerHTML = '';
+      const list = onlineUsers.length ? onlineUsers : [currentUser];
+      list.forEach(u => {
+        const [bg, fg] = avatarColor(u);
+        const div = document.createElement('div');
+        div.className = 'user-item';
+        div.setAttribute('role', 'listitem');
+        div.innerHTML = `
       <div class="user-avatar" style="background:${bg}; color:${fg}">${initials(u)}</div>
       <span style="font-size:13px; color:var(--text-2)">${escHtml(u)}</span>
       <div class="udot" aria-hidden="true"></div>`;
-    el.appendChild(div);
-  });
-}
-
-function setConnectionStatus(state) {
-  const dot   = document.getElementById('conn-dot');
-  const label = document.getElementById('conn-label');
-  dot.className = 'dot';
-  if (state === 'online') {
-    dot.classList.add('online');
-    label.textContent = 'Conectado';
-  } else if (state === 'error') {
-    dot.classList.add('error');
-    label.textContent = 'Error';
-  } else {
-    label.textContent = 'Desconectado';
-  }
-}
-
-// ── WebSocket ──────────────────────────────────────────────────────────────
-function connectWS() {
-  const WS_URL = 'ws://localhost:3000';
-  ws = new WebSocket(WS_URL);
-
-  ws.addEventListener('open', () => {
-    setConnectionStatus('online');
-    enableInput(true);
-
-    // Enviar evento de unión con nombre de usuario
-    const joinMsg = JSON.stringify({ type: 'join', user: currentUser, room: currentRoom });
-    ws.send(joinMsg);
-  });
-
-  ws.addEventListener('message', (event) => {
-    let data;
-    try { data = JSON.parse(event.data); }
-    catch { data = { type: 'text', user: 'Servidor', text: event.data }; }
-
-    if (data.type === 'join') {
-      appendSystemMsg(`⬡ ${data.user} se unió a la sala`);
-      if (!onlineUsers.includes(data.user)) onlineUsers.push(data.user);
-      renderUsers();
-    } else if (data.type === 'leave') {
-      appendSystemMsg(`⬡ ${data.user} abandonó la sala`);
-      onlineUsers = onlineUsers.filter(u => u !== data.user);
-      renderUsers();
-    } else if (data.type === 'message' || data.type === 'text') {
-      const isOwn = data.user === currentUser;
-      appendMessage(data.user || 'Servidor', data.text || data.message || event.data, isOwn, data.time);
-    } else {
-      // Historial (mensajes planos del servidor legacy)
-      appendMessage('Sistema', event.data, false, null);
+        el.appendChild(div);
+      });
     }
-  });
 
-  ws.addEventListener('close', () => {
-    setConnectionStatus('offline');
-    enableInput(false);
-    appendSystemMsg('⬡ Conexión cerrada. Intenta recargar la página.');
-  });
-
-  ws.addEventListener('error', () => {
-    setConnectionStatus('error');
-    showToast('⚠ No se pudo conectar con el servidor WebSocket en localhost:3000');
-    enableInput(false);
-  });
-}
-
-function enableInput(on) {
-  document.getElementById('msg-input').disabled = !on;
-  document.getElementById('send-btn').disabled = !on;
-}
-
-function sendMessage() {
-  const input = document.getElementById('msg-input');
-  const text = input.value.trim();
-  if (!text || !ws || ws.readyState !== WebSocket.OPEN) return;
-
-  const payload = JSON.stringify({ type: 'message', user: currentUser, text, room: currentRoom, time: timestamp() });
-  ws.send(payload);
-  input.value = '';
-}
-
-// ── Login ──────────────────────────────────────────────────────────────────
-document.getElementById('join-btn').addEventListener('click', () => {
-  const rawName = document.getElementById('username-input').value.trim();
-  const rawRoom = document.getElementById('room-input').value.trim() || 'general';
-  currentUser = rawName || randomAlias();
-  currentRoom = rawRoom;
-
-  document.getElementById('user-tag').textContent = currentUser;
-  document.getElementById('ch-name').textContent  = '# ' + currentRoom;
-  document.getElementById('login-overlay').style.display = 'none';
-  onlineUsers = [currentUser];
-  renderUsers();
-  connectWS();
-});
-
-// Allow pressing Enter on login inputs
-['username-input','room-input'].forEach(id => {
-  document.getElementById(id).addEventListener('keydown', e => {
-    if (e.key === 'Enter') document.getElementById('join-btn').click();
-  });
-});
-
-// Google placeholder
-document.getElementById('google-btn').addEventListener('click', async () => {
-
-  try {
-
-    const result = await signInWithPopup(auth, provider);
-
-    const user = result.user;
-
-    currentUser = user.displayName || randomAlias();
-
-    document.getElementById('user-tag').textContent = currentUser;
-
-    document.getElementById('login-overlay').style.display = 'none';
-
-    onlineUsers = [currentUser];
-
-    renderUsers();
-
-    connectWS();
-
-    showToast(`Bienvenido ${currentUser}`);
-
-    console.log(user);
-
-  } catch (error) {
-
-    console.error(error);
-
-    showToast('Error al iniciar sesión con Google');
-
-  }
-
-});
-
-// ── Room switching ─────────────────────────────────────────────────────────
-document.querySelectorAll('.room-item').forEach(item => {
-  item.addEventListener('click', () => {
-    document.querySelectorAll('.room-item').forEach(r => r.classList.remove('active'));
-    item.classList.add('active');
-    const room = item.dataset.room;
-    currentRoom = room;
-    document.getElementById('ch-name').textContent = '# ' + room;
-    document.getElementById('messages').innerHTML = '<div class="date-divider" id="today-divider">hoy</div>';
-    appendSystemMsg(`⬡ Cambiaste a #${room}`);
-    if (ws && ws.readyState === WebSocket.OPEN) {
-      ws.send(JSON.stringify({ type: 'switch_room', user: currentUser, room }));
+    function setConnectionStatus(state) {
+      const dot = document.getElementById('conn-dot');
+      const label = document.getElementById('conn-label');
+      dot.className = 'dot';
+      if (state === 'online') {
+        dot.classList.add('online');
+        label.textContent = 'Conectado';
+      } else if (state === 'error') {
+        dot.classList.add('error');
+        label.textContent = 'Error';
+      } else {
+        label.textContent = 'Desconectado';
+      }
     }
-  });
-});
 
-// ── Input events ───────────────────────────────────────────────────────────
-document.getElementById('msg-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
-});
-document.getElementById('send-btn').addEventListener('click', sendMessage);
-</script>
+    // ── WebSocket ──────────────────────────────────────────────────────────────
+    function connectWS() {
+      const WS_URL = 'ws://localhost:3000';
+      ws = new WebSocket(WS_URL);
+
+      ws.addEventListener('open', () => {
+        setConnectionStatus('online');
+        enableInput(true);
+
+        // Enviar evento de unión con nombre de usuario
+        const joinMsg = JSON.stringify({ type: 'join', user: currentUser, room: currentRoom });
+        ws.send(joinMsg);
+      });
+
+      ws.addEventListener('message', (event) => {
+        let data;
+        try { data = JSON.parse(event.data); }
+        catch { data = { type: 'text', user: 'Servidor', text: event.data }; }
+
+        if (data.type === 'join') {
+          appendSystemMsg(`⬡ ${data.user} se unió a la sala`);
+          if (!onlineUsers.includes(data.user)) onlineUsers.push(data.user);
+          renderUsers();
+        } else if (data.type === 'leave') {
+          appendSystemMsg(`⬡ ${data.user} abandonó la sala`);
+          onlineUsers = onlineUsers.filter(u => u !== data.user);
+          renderUsers();
+        } else if (data.type === 'message' || data.type === 'text') {
+          const isOwn = data.user === currentUser;
+          appendMessage(data.user || 'Servidor', data.text || data.message || event.data, isOwn, data.time);
+        } else {
+          // Historial (mensajes planos del servidor legacy)
+          appendMessage('Sistema', event.data, false, null);
+        }
+      });
+
+      ws.addEventListener('close', () => {
+        setConnectionStatus('offline');
+        enableInput(false);
+        appendSystemMsg('⬡ Conexión cerrada. Intenta recargar la página.');
+      });
+
+      ws.addEventListener('error', () => {
+        setConnectionStatus('error');
+        showToast('⚠ No se pudo conectar con el servidor WebSocket en localhost:3000');
+        enableInput(false);
+      });
+    }
+
+    function enableInput(on) {
+      document.getElementById('msg-input').disabled = !on;
+      document.getElementById('send-btn').disabled = !on;
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('msg-input');
+      const text = input.value.trim();
+      if (!text || !ws || ws.readyState !== WebSocket.OPEN) return;
+
+      const payload = JSON.stringify({ type: 'message', user: currentUser, text, room: currentRoom, time: timestamp() });
+      ws.send(payload);
+      input.value = '';
+    }
+
+    // ── Login ──────────────────────────────────────────────────────────────────
+    document.getElementById('join-btn').addEventListener('click', () => {
+      const rawName = document.getElementById('username-input').value.trim();
+      const usernameToSend = rawName || 'Usuario_' + Math.floor(100 + Math.random() * 900);
+
+      // Llamamos a la función global de inicio de sesión
+      window.startChatWithUser(usernameToSend);
+    });
+
+    // ── Room switching ─────────────────────────────────────────────────────────
+    document.querySelectorAll('.room-item').forEach(item => {
+      item.addEventListener('click', () => {
+        document.querySelectorAll('.room-item').forEach(r => r.classList.remove('active'));
+        item.classList.add('active');
+        const room = item.dataset.room;
+        currentRoom = room;
+        document.getElementById('ch-name').textContent = '# ' + room;
+        document.getElementById('messages').innerHTML = '<div class="date-divider" id="today-divider">hoy</div>';
+        appendSystemMsg(`⬡ Cambiaste a #${room}`);
+        if (ws && ws.readyState === WebSocket.OPEN) {
+          ws.send(JSON.stringify({ type: 'switch_room', user: currentUser, room }));
+        }
+      });
+    });
+
+    // ── Input events ───────────────────────────────────────────────────────────
+    document.getElementById('msg-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+    });
+    document.getElementById('send-btn').addEventListener('click', sendMessage);
+  </script>
+
 </body>
+
 </html>

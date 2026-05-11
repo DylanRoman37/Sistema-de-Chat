@@ -1,18 +1,37 @@
-
 const WebSocket = require('ws');
 const http = require('http');
 const sqlite3 = require('sqlite3').verbose();
+const express = require('express');
+const cors = require('cors');
+const authRoutes = require('./auth/authRoutes');
 
 // Conectamos/Creamos la base de datos 
 const path = require('path');
 const dbPath = path.join(__dirname, 'chat.db');
 const db = new sqlite3.Database(dbPath);
 
+// Ruta al Frontend (sube un nivel desde Backend/)
+const frontendPath = path.join(__dirname, '..', 'Frontend');
+
 db.serialize(() => {
     db.run("CREATE TABLE IF NOT EXISTS mensajes (id INTEGER PRIMARY KEY AUTOINCREMENT, texto TEXT)");
 });
 
-const server = http.createServer();
+// --- Configuración de Express ---
+const app = express();
+app.use(cors()); // Permite peticiones del frontend
+app.use(express.json()); // Permite recibir datos en formato JSON
+app.use('/api/auth', authRoutes); // Registra la ruta de autenticación
+
+// Servir el frontend como archivos estáticos desde http://localhost:3000
+app.use(express.static(frontendPath));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'index.html'));
+});
+// -------------------------------------------------------------------------
+
+// MODIFICADO: Le pasamos "app" (Express) al servidor para que maneje tanto HTTP como WebSockets
+const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
 
@@ -51,5 +70,5 @@ wss.on('connection', (ws) => {
 
 
 server.listen(3000, () => {
-    console.log('Servidor WebSocket corriendo en el puerto 3000 con Base de Datos SQLite');
+    console.log('Servidor Express y WebSocket corriendo en el puerto 3000 con Base de Datos SQLite');
 });
