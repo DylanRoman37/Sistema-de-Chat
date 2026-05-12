@@ -903,7 +903,12 @@
         let data;
         try { data = JSON.parse(event.data); }
         catch { data = { type: 'text', user: 'Servidor', text: event.data }; }
-
+        
+        //Esta parte es para alerta visual
+        if(data.type === 'system'){
+          appendSystemMsg('O ${data.message}');
+        } 
+        
         if (data.type === 'join') {
           appendSystemMsg(`⬡ ${data.user} se unió a la sala`);
           if (!onlineUsers.includes(data.user)) onlineUsers.push(data.user);

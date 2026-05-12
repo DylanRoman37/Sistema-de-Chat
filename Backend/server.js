@@ -5,6 +5,7 @@ const express = require('express');
 const cors = require('cors');
 const authRoutes = require('./auth/authRoutes');
 
+
 // Conectamos/Creamos la base de datos 
 const path = require('path');
 const dbPath = path.join(__dirname, 'chat.db');
@@ -33,12 +34,11 @@ app.get('*', (req, res) => {
 // MODIFICADO: Le pasamos "app" (Express) al servidor para que maneje tanto HTTP como WebSockets
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
-
+const clients = new Map();
 
 wss.on('connection', (ws) => {
     console.log('¡Nuevo cliente conectado a la línea abierta!');
-
-
+    //Cargar historial 
     db.all("SELECT texto FROM mensajes", [], (err, rows) => {
         if (!err) {
             rows.forEach((row) => {
@@ -62,13 +62,29 @@ wss.on('connection', (ws) => {
             }
         });
     });
-
+//Notificacion si alguien ingresa o no 
     ws.on('close', () => {
-        console.log('Un cliente se ha desconectado de la línea.');
+        const user = clients.get(ws);
+        if(user){
+            broadcast({
+                type: 'system',
+                message: '${user.username} ha abandonado el chat, volvera pronto'
+            });
+            clients.delete(ws);//Lo eliminamos para no llenar memoria 
+        }
+        //console.log('Un cliente se ha desconectado de la línea.');
     });
 });
 
-
+//Funcion para  no repetir 
+function broadcast(payload){
+    const msgString = JSON.stringify(payload);
+    wss.clients.forEach((client)=> {
+        if(client.readyState === WebSocket.OPEN){
+            client.send(msgString);
+        }
+    });
+}
 server.listen(3000, () => {
     console.log('Servidor Express y WebSocket corriendo en el puerto 3000 con Base de Datos SQLite');
 });
